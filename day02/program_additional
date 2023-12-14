@@ -1,0 +1,24 @@
+f = open("input")
+lines = f.read().strip().split("\n")
+
+solution = 0
+for line in lines:
+    parties = line.split(":")[1]
+    max_green = 0
+    max_red = 0
+    max_blue = 0
+    for round in parties.split(";"):
+        cubes = round.split(",")
+        for cube in cubes:
+            n, color = cube.strip().split(" ")
+            n = int(n)
+            max_blue = n if color == "blue" and n > max_blue else max_blue
+            max_red = n if color == "red" and n > max_red else max_red
+            max_green = n if color == "green" and n > max_green else max_green
+    print(f"{line} -> {(max_blue, max_red, max_green)} -> {max_blue*max_green*max_red}")
+    solution += max_blue * max_green * max_red
+
+print(solution)
+                
+            
+        
